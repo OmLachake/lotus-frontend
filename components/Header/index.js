@@ -21,7 +21,6 @@ function Header() {
   const closeSideMenu = () => {
     setSideMenu(false);
   };
-  console.log("Side Menu", sideMenu);
   const isLoggedIn = true;
 
   const renderActions = () => {
@@ -50,14 +49,14 @@ function Header() {
           !sideMenu ? `translate-x-[0%]` : "translate-x-[-100%]"
         } side-menu-mobile`}
       >
-        <div className="mb-4">
+        <div className="mb-4 px-2">
           <Link href="/">
             {/*eslint-disable-next-line @next/next/no-img-element*/}
             <img
               src="https://res.cloudinary.com/lachakeom/image/upload/v1655788317/logo_gp9rxv.png"
-              width={200}
-              height={40}
-              className="cursor-pointer object-contain min-w-[200px] min-h-[40px] sm:hidden "
+              width={100}
+              height={20}
+              className="cursor-pointer object-contain min-w-[100px] min-h-[20px] sm:hidden "
               alt="Lotus Wear Logo"
               onClick={closeSideMenu}
             />
@@ -66,11 +65,14 @@ function Header() {
 
         {isLoggedIn && (
           <>
+            <div className="px-3 text-xl font-light font-josan">
+              Hello <span className="font-bold font-lato">Om,</span>
+            </div>
             <ul className="">
               <li>
                 <Link href="/settings">
                   <p
-                    className="header-nav-link cursor-pointer"
+                    className="header-nav-link cursor-pointer !text-purple"
                     onClick={closeSideMenu}
                   >
                     Settings
@@ -80,7 +82,7 @@ function Header() {
               <li>
                 <Link href="/orders">
                   <p
-                    className="header-nav-link cursor-pointer"
+                    className="header-nav-link cursor-pointer !text-purple"
                     onClick={closeSideMenu}
                   >
                     My Orders
@@ -91,7 +93,7 @@ function Header() {
               <li>
                 <Link href="/wishlist">
                   <p
-                    className="header-nav-link cursor-pointer"
+                    className="header-nav-link cursor-pointer !text-purple"
                     onClick={closeSideMenu}
                   >
                     Wishlist
@@ -102,7 +104,7 @@ function Header() {
               <li>
                 <p
                   onClick={closeSideMenu}
-                  className="header-nav-link flex justify-start items-center gap-3 cursor-pointer "
+                  className="!text-purple header-nav-link flex justify-start items-center gap-3 cursor-pointer "
                 >
                   <MdExitToApp /> Sign Out
                 </p>

@@ -16,7 +16,7 @@ export default function Home() {
           className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-blue-600"
           role="status"
         >
-          <span className="visually-hidden">Loading...</span>
+          <span className="visually-hidden text-off-purple">Loading...</span>
         </div>
       </div>
     );
@@ -41,23 +41,26 @@ export default function Home() {
         />
         <link rel="icon" href="/logoIcon.ico" />
       </Head>
-      <main className="topGap">
+      <main className="">
         <h1 className="text-5xl text-red font-bold font-josan">Hello</h1>
-        {products.map((product) => {
-          const { title, slug, price } = product?.attributes;
-          const image =
-            product?.attributes?.images?.data[0]?.attributes?.formats?.small;
 
-          return (
-            <ProductCard
-              key={slug}
-              title={title}
-              slug={slug}
-              price={price}
-              image={image}
-            />
-          );
-        })}
+        <div className="productGrid">
+          {products.map((product) => {
+            const { title, slug, price } = product?.attributes;
+            const image =
+              product?.attributes?.images?.data[0]?.attributes?.formats?.small;
+
+            return (
+              <ProductCard
+                key={slug}
+                title={title}
+                slug={slug}
+                price={price}
+                image={image}
+              />
+            );
+          })}
+        </div>
       </main>
     </div>
   );
