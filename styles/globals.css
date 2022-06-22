@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&family=Lato:wght@100;300;400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Rye&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  /* body {
+    @apply bg-[#141414] text-white overflow-auto
+      overflow-x-hidden;
+  } */
+
+  /* ::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  ::-webkit-scrollbar-track {
+    display: none;
+  }
+  ::-webkit-scrollbar-corner {
+    display: none;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #dc2626;
+  } */
+
+  /* header {
+    @apply fixed top-0 z-40 flex w-full items-center 
+      justify-between px-4 py-4 transition-all lg:px-10 lg:py-10;
+  } */
+
+  header {
+    @apply flex px-2 py-7 justify-between h-10 items-center border border-b w-full fixed
+    bg-white top-0 right-0 lg:px-[10rem] lg:py-8 md:px-6 md:py-8;
+  }
+
+  footer {
+  }
+
+  button {
+    @apply text-center;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-3 py-1.5 md:px-6 md:py-2.5 bg-purple text-white 
+    font-medium font-lato text-xs leading-tight rounded w-auto md:w-fit
+    shadow-md hover:shadow-lg  flex items-center justify-center gap-5
+    focus:shadow-lg focus:outline-none focus:ring-0 text-center
+    active:shadow-lg transition-all duration-150 ease-in-out 
+    whitespace-nowrap hover:bg-purple/90 cursor-pointer;
+  }
+
+  .btn-outline {
+    @apply px-3.5 py-1.5 md:px-6 md:py-2.5 bg-white text-purple text-center
+    font-medium font-lato text-xs leading-tight rounded w-auto md:w-fit border border-purple
+    shadow-md  hover:shadow-lg  flex items-center justify-center gap-5
+    focus:shadow-lg focus:outline-none focus:ring-0 text-center
+    active:shadow-lg transition-all duration-150 ease-in-out 
+    whitespace-nowrap hover:bg-light-purple cursor-pointer;
+  }
+
+  .topGap {
+    @apply mt-[100px];
+  }
+  .header-nav-link {
+    @apply md:px-2  px-3 py-1.5 text-off-purple hover:text-purple font-lato md:w-fit font-normal 
+    md:text-sm w-auto rounded hover:bg-light-purple/50 active:bg-light-purple/50 
+    md:hover:bg-white;
+  }
+
+  .categories-bar {
+  }
+
+  .profileButton {
+    @apply dropdown-toggle px-6 py-2.5 bg-purple text-white
+    font-medium font-lato text-xs leading-tight rounded w-[180px]
+    shadow-md  hover:shadow-lg  flex items-center justify-between
+    focus:shadow-lg focus:outline-none focus:ring-0 
+    active:shadow-lg transition-all duration-150 ease-in-out 
+    whitespace-nowrap hover:bg-purple/90;
+  }
+  .profileOptionsList {
+    @apply w-[180px] min-w-max absolute bg-[#f4edff] text-base z-50 float-left
+    py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding
+    border-none justify-center items-center;
+  }
+  .profileOption {
+    @apply text-sm py-1 my-1 px-4 whitespace-nowrap bg-transparent
+    text-black hover:bg-white w-full cursor-pointer rounded flex justify-start
+    items-center gap-x-[10px] font-lato font-light;
+  }
+
+  .cart {
+    @apply text-2xl rounded cursor-pointer hover:bg-light-purple py-1 px-2 md:px-5  
+    relative flex;
+  }
+
+  .side-menu-mobile {
+    @apply md:hidden z-[100] fixed top-[65px] bg-white left-[100%] 
+    w-[100vw] h-[100vh] transition-all duration-500 px-10 py-10 border border-t-purple
+    flex flex-col gap-2;
+  }
+}
