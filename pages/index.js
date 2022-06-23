@@ -1,25 +1,16 @@
 import Head from "next/head";
 import { useQuery } from "urql";
 import ProductCard from "../components/Product/ProductCard";
-import { PRODUCT_QUERY } from "../lib/query";
-import "tw-elements";
+import { PRODUCTS_QUERY } from "../lib/query";
 import Header from "../components/Header";
+import FullPageLoading from "../components/FullPageLoading";
 
 export default function Home() {
-  const [results] = useQuery({ query: PRODUCT_QUERY });
+  const [results] = useQuery({ query: PRODUCTS_QUERY });
   const { data, fetching, error } = results;
 
   if (fetching) {
-    return (
-      <div className="flex justify-center items-center h-[50vh] w-full">
-        <div
-          className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-blue-600"
-          role="status"
-        >
-          <span className="visually-hidden text-off-purple">Loading...</span>
-        </div>
-      </div>
-    );
+    return <FullPageLoading />;
   }
   if (error) {
     return <h1>Error Loading Data</h1>;
