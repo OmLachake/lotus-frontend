@@ -1,11 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { MdExitToApp, MdOutlineShoppingCart } from "react-icons/md";
-import { useRecoilState } from "recoil";
-import { sideMenuAtom } from "../../atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { CartCountSelector, sideMenuAtom } from "../../atoms";
 function Header() {
   const router = useRouter();
   const [sideMenu, setSideMenu] = useRecoilState(sideMenuAtom);
@@ -22,6 +21,7 @@ function Header() {
     setSideMenu(false);
   };
   const isLoggedIn = true;
+  const cartCount = useRecoilValue(CartCountSelector);
 
   const renderActions = () => {
     return (
@@ -29,13 +29,17 @@ function Header() {
         <div className="flex justify-between items-center gap-1">
           <div className="cart">
             <MdOutlineShoppingCart />
-            <span
-              className="absolute right-2 -top-2 rounded-full bg-red-600 
+            {cartCount > 0 ? (
+              <span
+                className="absolute right-2 -top-2 rounded-full bg-red-600 
                       w-5 h-5 top right p-0 m-0 text-white font-mono text-sm  
                       leading-tight text-center border bg-red"
-            >
-              5
-            </span>
+              >
+                {cartCount}
+              </span>
+            ) : (
+              ""
+            )}
           </div>
           {isLoggedIn ? renderLoggedIn() : renderGuest()}
         </div>
@@ -158,13 +162,17 @@ function Header() {
       <div className="md:hidden flex items-center justify-between">
         <div className="cart">
           <MdOutlineShoppingCart />
-          <span
-            className="absolute right-2 -top-2 rounded-full bg-red-600 
+          {cartCount > 0 ? (
+            <span
+              className="absolute right-2 -top-2 rounded-full bg-red-600 
                       w-5 h-5 top right p-0 m-0 text-white font-mono text-sm  
                       leading-tight text-center border bg-red"
-          >
-            5
-          </span>
+            >
+              {cartCount}
+            </span>
+          ) : (
+            ""
+          )}
         </div>
 
         <div

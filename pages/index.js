@@ -2,7 +2,6 @@ import Head from "next/head";
 import { useQuery } from "urql";
 import ProductCard from "../components/Product/ProductCard";
 import { PRODUCTS_QUERY } from "../lib/query";
-import Header from "../components/Header";
 import FullPageLoading from "../components/FullPageLoading";
 
 export default function Home() {
@@ -25,7 +24,7 @@ export default function Home() {
   return (
     <div className="">
       <Head>
-        <title>My Shop</title>
+        <title>Lotus Wear : Fashion at affordable prices!</title>
         <meta
           name="description"
           content="Shop Clothing Online for best prices!"

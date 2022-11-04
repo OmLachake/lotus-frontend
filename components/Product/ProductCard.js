@@ -9,8 +9,8 @@ function ProductCard({ price, title, slug, image }) {
     <div
       className="productCard group cursor-pointer"
       onClick={() => {
-        window.open("/products/" + slug, "_blank");
-        // router.push("/product/" + slug);
+        // window.open("/products/" + slug, "_blank");
+        router.push("/products/" + slug);
       }}
     >
       <div className="overflow-hidden  mx-3 mt-3 rounded-t">

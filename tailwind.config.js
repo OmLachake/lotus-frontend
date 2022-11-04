@@ -29,6 +29,13 @@ module.exports = {
         // => @media (min-width: 992px) { ... }
         xs: "450px",
       },
+      gridTemplateRows: {
+        12: "repeat(12, minmax(0, 1fr))",
+        6: "repeat(6,minxmax(0,10rem))",
+      },
+      gridRowEnd: {
+        12: "12",
+      },
     },
   },
   plugins: [require("tw-elements/dist/plugin")],
