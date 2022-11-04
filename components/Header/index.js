@@ -4,10 +4,12 @@ import { useRouter } from "next/router";
 import { FaAngleDown } from "react-icons/fa";
 import { MdExitToApp, MdOutlineShoppingCart } from "react-icons/md";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { CartCountSelector, sideMenuAtom } from "../../atoms";
+import { CartCountSelector, CartMenuAtom, sideMenuAtom } from "../../atoms";
+import Cart from "../Cart";
 function Header() {
   const router = useRouter();
   const [sideMenu, setSideMenu] = useRecoilState(sideMenuAtom);
+  const [cartMenu, setCartMenu] = useRecoilState(CartMenuAtom);
 
   const toggleSideMenu = () => {
     if (sideMenu) {
@@ -27,7 +29,10 @@ function Header() {
     return (
       <div className="hidden md:flex items-center space-x-3 ">
         <div className="flex justify-between items-center gap-1">
-          <div className="cart">
+          <div
+            className="cart"
+            onClick={() => setCartMenu((prevState) => !prevState)}
+          >
             <MdOutlineShoppingCart />
             {cartCount > 0 ? (
               <span
@@ -160,7 +165,10 @@ function Header() {
   const renderHamburgerIcon = () => {
     return (
       <div className="md:hidden flex items-center justify-between">
-        <div className="cart">
+        <div
+          className="cart"
+          onClick={() => setCartMenu((prevState) => !prevState)}
+        >
           <MdOutlineShoppingCart />
           {cartCount > 0 ? (
             <span
@@ -311,6 +319,10 @@ function Header() {
     );
   };
 
+  const renderCart = () => {
+    return <Cart />;
+  };
+
   return (
     <header>
       <div className="flex justify-between items-center w-full">
@@ -320,6 +332,8 @@ function Header() {
         {renderActions()}
         {/* Menu Button */}
         {renderHamburgerIcon()}
+        {/* Cart */}
+        {renderCart()}
       </div>
 
       {/* Sidebar Mobile Menu */}

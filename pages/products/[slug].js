@@ -1,19 +1,11 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import {
-  BsBagCheckFill,
-  BsCartPlus,
-  BsDash,
-  BsDashLg,
-  BsPlus,
-  BsPlusLg,
-} from "react-icons/bs";
+import { BsBagCheckFill, BsCartPlus, BsDash, BsPlus } from "react-icons/bs";
 import { useRecoilState } from "recoil";
 import { useQuery } from "urql";
 import { CartItemsSelector } from "../../atoms";
 import FullPageLoading from "../../components/FullPageLoading";
-import { ItemAddedToCart } from "../../components/Toasts";
 import { GET_PRODUCT_QUERY } from "../../lib/query";
 
 function ProductPage() {
@@ -40,12 +32,9 @@ function ProductPage() {
   }
 
   const product = data?.products?.data[0]?.attributes;
-  console.log(product?.images?.data);
-
   const imageUrls = product?.images?.data?.map((image) => {
     return image?.attributes?.formats?.large?.url;
   });
-  console.log(`/products/${slug}Product Page`, product, imageUrls);
   const firstImage = imageUrls.splice(0, 1);
 
   const AddToCart = () => {
@@ -54,6 +43,7 @@ function ProductPage() {
       quantity,
       title: product.title,
       price: product.price,
+      image: firstImage,
     });
 
     toast(
@@ -106,13 +96,13 @@ function ProductPage() {
               </button>
             </div>
           </div>
-          <div className="flex w-full justify-between items-center lg:justify-start lg:gap-10">
-            <button className="productActions-Button btn-outline  md:col-start-6 ">
+          <div className="flex flex-col w-full justify-between items-center md:flex-row lg:justify-start lg:gap-10">
+            <button className="productActions-Button btn-outline w-full md:w-auto">
               <BsBagCheckFill className="text-2xl md:text-lg" />
               Buy Now
             </button>
             <button
-              className="productActions-Button btn  md:col-start-auto"
+              className="productActions-Button btn  w-full  md:w-auto"
               onClick={AddToCart}
             >
               <BsCartPlus className="text-2xl md:text-lg" />
