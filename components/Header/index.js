@@ -1,15 +1,32 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { MdExitToApp, MdOutlineShoppingCart } from "react-icons/md";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { CartCountSelector, CartMenuAtom, sideMenuAtom } from "../../atoms";
+import {
+  CartCountSelector,
+  CartItemsAtom,
+  CartMenuAtom,
+  sideMenuAtom,
+} from "../../atoms";
+
+const getCartFromLocal = () => {
+  const cartItems = JSON.parse(localStorage.getItem("cartItems"));
+  return cartItems ? cartItems : [];
+};
+
 import Cart from "../Cart";
 function Header() {
   const router = useRouter();
   const [sideMenu, setSideMenu] = useRecoilState(sideMenuAtom);
   const [cartMenu, setCartMenu] = useRecoilState(CartMenuAtom);
+  const [cartItems, setCartItems] = useRecoilState(CartItemsAtom);
+
+  useEffect(() => {
+    setCartItems(getCartFromLocal());
+  }, []);
 
   const toggleSideMenu = () => {
     if (sideMenu) {
@@ -22,7 +39,7 @@ function Header() {
   const closeSideMenu = () => {
     setSideMenu(false);
   };
-  const isLoggedIn = true;
+  const isLoggedIn = false;
   const cartCount = useRecoilValue(CartCountSelector);
 
   const renderActions = () => {
@@ -245,11 +262,11 @@ function Header() {
             <p className="header-nav-link cursor-pointer">About</p>
           </Link>
 
-          <Link href="">
+          <Link href="/contact">
             <p className="header-nav-link cursor-pointer">Contact</p>
           </Link>
 
-          <Link href="">
+          <Link href="/support">
             <p className="header-nav-link cursor-pointer">Support</p>
           </Link>
         </div>

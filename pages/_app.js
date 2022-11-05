@@ -4,6 +4,7 @@ import Header from "../components/Header/index";
 import { RecoilRoot } from "recoil";
 import "tw-elements";
 import { Toaster } from "react-hot-toast";
+const { AnimatePresence } = require("framer-motion");
 
 const Client = createClient({ url: process.env.NEXT_PUBLIC_BACKEND_API });
 
@@ -11,9 +12,11 @@ function MyApp({ Component, pageProps }) {
   return (
     <RecoilRoot>
       <GraphQLProdiver value={Client}>
-        <Header />
-        <Component {...pageProps} />
-        <Toaster />
+        <AnimatePresence>
+          <Header />
+          <Component {...pageProps} />
+          <Toaster />
+        </AnimatePresence>
       </GraphQLProdiver>
     </RecoilRoot>
   );

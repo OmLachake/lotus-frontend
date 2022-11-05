@@ -46,6 +46,8 @@ export const CartItemsSelector = selector({
         newCartItems[index].quantity + newItem.quantity;
     }
 
+    localStorage.setItem("cartItems", JSON.stringify(newCartItems));
+
     console.log("CartItems Setter - New Cart = ", newCartItems);
     set(CartItemsAtom, newCartItems);
   },

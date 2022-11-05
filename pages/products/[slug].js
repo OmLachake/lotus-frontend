@@ -35,7 +35,7 @@ function ProductPage() {
   const imageUrls = product?.images?.data?.map((image) => {
     return image?.attributes?.formats?.large?.url;
   });
-  const firstImage = imageUrls.splice(0, 1);
+  const firstImage = imageUrls?.splice(0, 1);
 
   const AddToCart = () => {
     setCartItems({
@@ -43,7 +43,7 @@ function ProductPage() {
       quantity,
       title: product.title,
       price: product.price,
-      image: firstImage,
+      image: firstImage[0],
     });
 
     toast(
@@ -69,12 +69,12 @@ function ProductPage() {
     <main>
       <div className="productDetails">
         <div className="flex flex-col w-[100%] lg:w-[60%]">
-          <h3 className="productDetails-Title">{product.title}</h3>
+          <h3 className="productDetails-Title">{product?.title}</h3>
           <div className="productDetails-Image">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               className="productDetails-Image__main"
-              src={firstImage}
+              src={firstImage[0]}
               alt=""
             />
           </div>
