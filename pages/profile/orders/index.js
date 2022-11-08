@@ -1,7 +1,7 @@
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
 import React from "react";
-const stripe = require("stripe")(
+const stripe = require(/* webpackIgnore: true */ "stripe")(
   `${process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY}`
 );
 
