@@ -4,6 +4,13 @@ const nextConfig = {
   images: {
     domains: ["res.cloudinary.com"],
   },
+  webpack: (config, options) => {
+    config.module.rules.push({
+      target: "node",
+    });
+
+    return config;
+  },
 };
 
 module.exports = nextConfig;
