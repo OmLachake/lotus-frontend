@@ -1,4 +1,5 @@
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 const stripe = require(/* webpackIgnore: true */ "stripe")(
@@ -80,6 +81,10 @@ const Orders = ({ user, orders }) => {
   };
   return (
     <div>
+      <Head>
+        <title>Your Order History</title>
+        <meta name="description" content="" />
+      </Head>
       <main>
         <div className="bg-white p-5 md:p-10 flex flex-col justify-start items-center">
           <div

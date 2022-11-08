@@ -57,7 +57,7 @@ function ProductPage() {
     if (!existsInCart) {
       setCartItems({
         slug,
-        quantity: 1,
+        quantity,
         title: product.title,
         price: product.price,
         image: firstImage[0],
@@ -102,11 +102,7 @@ function ProductPage() {
     <div>
       <Head>
         <title>{product?.title}</title>
-        <meta
-          name="description"
-          content="Shop Clothing Online for best prices!"
-        />
-        <link rel="icon" href="/logoIcon.ico" />
+        <meta name="description" content={product?.description} />
       </Head>
       <main>
         <div className="productDetails">

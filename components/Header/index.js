@@ -255,7 +255,7 @@ function Header() {
               src="https://res.cloudinary.com/lachakeom/image/upload/v1655883074/logoIcon_wok4uu.png"
               width={50}
               height={20}
-              className="cursor-pointerobject-contain min-w-[50px] min-h-[20px]"
+              className="cursor-pointerobject-contain min-w-[50px] min-h-[20px] cursor-pointer"
               alt="Lotus Wear Logo"
             />
           </div>
@@ -351,8 +351,10 @@ function Header() {
 
   return (
     <div>
+      <Head>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+      </Head>
       <header>
-        <Script src="https://js.stripe.com/v3/"></Script>
         <div className="flex justify-between items-center w-full">
           {/* NavLink */}
           {renderNavLinks()}

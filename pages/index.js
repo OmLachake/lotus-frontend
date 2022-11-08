@@ -29,7 +29,6 @@ export default function Home() {
           name="description"
           content="Shop Clothing Online for best prices!"
         />
-        <link rel="icon" href="/logoIcon.ico" />
       </Head>
       <main className="">
         <h1 className="text-3xl text-red font-bold font-josan px-6 sm:px-0">
