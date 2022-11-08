@@ -40,16 +40,24 @@
       justify-between px-4 py-4 transition-all lg:px-10 lg:py-10;
   } */
   body {
-    @apply bg-light-purple/30;
+    @apply bg-light-purple/30 ;
   }
   header {
     @apply flex px-2 py-7 justify-between h-10 items-center  border border-b w-full fixed
     bg-white top-0 right-0 xl:px-[10rem] lg:px-[5rem] lg:py-8 md:px-6 md:py-8 shadow-sm z-50;
   }
+
+  header {
+    @apply flex px-2 py-7 justify-between h-10 items-center  border border-b w-full fixed
+    bg-white top-0 right-0 xl:px-[10rem] lg:px-[5rem] lg:py-8 md:px-6 md:py-8 shadow-sm z-50;
+  }
+  
   main {
     @apply mt-[80px] pt-[20px] mx-2 md:mx-6 xl:mx-[10rem] lg:mx-[5rem] mb-10;
   }
   footer {
+    @apply flex px-2 py-7 justify-between h-10 items-center  border border-t w-full
+    bg-white top-0 right-0 xl:px-[10rem] lg:px-[5rem] lg:py-8 md:px-6 md:py-8 shadow-sm z-50;
   }
 
   button {
@@ -117,7 +125,7 @@
 
   /* Product Grid */
   .productGrid {
-    @apply grid grid-cols-1 content-center px-6 sm:px-2 sm:grid-cols-3 justify-items-center	
+    @apply grid grid-cols-1 content-center px-6 sm:px-0 sm:grid-cols-3 justify-items-center	
     w-full pt-5 sm:flex-wrap gap-y-5 sm:gap-x-10 xl:grid-cols-4 md:gap-y-10;
   }
 
@@ -137,7 +145,7 @@
   .productDetails {
     @apply bg-white px-3 py-4 
     flex flex-col w-[100%] justify-center items-start
-    md:flex-row md:gap-5;
+    md:flex-row md:gap-5 md:px-8;
   }
   .productDetails-Title {
     @apply w-full font-josan text-4xl text-pink
@@ -164,7 +172,7 @@
   }
   .productDetails-Description {
     @apply font-lato font-light 
-    w-full;
+    w-full text-lg;
   }
   .productActions-Quantity {
     @apply flex w-full justify-between items-center gap-5 font-lato

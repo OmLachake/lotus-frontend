@@ -34,11 +34,9 @@ export const CartItemsSelector = selector({
     const newCartItems = get(CartItemsAtom);
     newCartItems = _.cloneDeep(newCartItems);
 
-    console.log("CartItems Setter - Old Cart = ", newCartItems);
     const index = newCartItems.findIndex((item) => {
       return item.slug === newItem.slug;
     });
-    console.log("index", index);
     if (index === -1) {
       newCartItems = [...newCartItems, newItem];
     } else {
@@ -48,7 +46,6 @@ export const CartItemsSelector = selector({
 
     localStorage.setItem("cartItems", JSON.stringify(newCartItems));
 
-    console.log("CartItems Setter - New Cart = ", newCartItems);
     set(CartItemsAtom, newCartItems);
   },
 });

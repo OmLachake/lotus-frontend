@@ -9,7 +9,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { CartItemsAtom, CartMenuAtom } from "../atoms";
 import _ from "lodash";
 import toast from "react-hot-toast";
-import getStripe from "../lib/getStripe";
+import getStripe, { handleCheckout } from "../lib/getStripe";
 const { motion } = require("framer-motion");
 
 const Cart = () => {
@@ -93,19 +93,19 @@ const Cart = () => {
   };
 
   //Payments
-  const handleCheckout = async () => {
-    const stripe = await getStripe();
-    const response = await fetch("/api/stripe", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(cartItems),
-    });
-    const data = await response.json();
-    console.log("checkout session -", data);
-    await stripe.redirectToCheckout({
-      sessionId: data.id,
-    });
-  };
+  // const handleCheckout = async () => {
+  //   const stripe = await getStripe();
+  //   const response = await fetch("/api/stripe", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(cartItems),
+  //   });
+  //   const data = await response.json();
+  //   console.log("checkout session -", data);
+  //   await stripe.redirectToCheckout({
+  //     sessionId: data.id,
+  //   });
+  // };
 
   const total = cartItems.reduce(
     (total, item) => total + item.quantity * item.price,
@@ -141,7 +141,7 @@ const Cart = () => {
           </motion.div>
           <button
             className="btn w-full mt-5 py-3 text-lg md:text-2xl"
-            onClick={handleCheckout}
+            onClick={() => handleCheckout(cartItems)}
           >
             <BsBagCheckFill className="" />
             Checkout

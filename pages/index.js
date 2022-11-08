@@ -32,7 +32,9 @@ export default function Home() {
         <link rel="icon" href="/logoIcon.ico" />
       </Head>
       <main className="">
-        <h1 className="text-5xl text-red font-bold font-josan">Hello</h1>
+        <h1 className="text-3xl text-red font-bold font-josan px-6 sm:px-0">
+          Browse All our Products!
+        </h1>
 
         <div className="productGrid">
           {products.map((product) => {

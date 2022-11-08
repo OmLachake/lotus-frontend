@@ -1,10 +1,11 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { BsBagCheckFill, BsCartPlus, BsDash, BsPlus } from "react-icons/bs";
 import { useRecoilState } from "recoil";
 import { useQuery } from "urql";
-import { CartItemsSelector } from "../../atoms";
+import { CartItemsSelector, CartMenuAtom } from "../../atoms";
 import FullPageLoading from "../../components/FullPageLoading";
 import { GET_PRODUCT_QUERY } from "../../lib/query";
 
@@ -12,6 +13,21 @@ function ProductPage() {
   const router = useRouter();
   const [quantity, setQuantity] = useState(1);
   const [cartItems, setCartItems] = useRecoilState(CartItemsSelector);
+  const [cartMenu, setCartMenu] = useRecoilState(CartMenuAtom);
+  const [existsInCart, setExistsInCart] = useState(false);
+  useEffect(() => {
+    let flag = false;
+    for (let i = 0; i < cartItems.length; i++) {
+      if (cartItems[i].slug === slug) {
+        setExistsInCart(true);
+        flag = true;
+      }
+    }
+
+    if (!flag) {
+      setExistsInCart(false);
+    }
+  }, [cartItems]);
 
   const increaseQuantity = () => setQuantity((prevQ) => prevQ + 1);
   const decreaseQuantity = () =>
@@ -37,7 +53,24 @@ function ProductPage() {
   });
   const firstImage = imageUrls?.splice(0, 1);
 
+  const BuyNow = () => {
+    if (!existsInCart) {
+      setCartItems({
+        slug,
+        quantity: 1,
+        title: product.title,
+        price: product.price,
+        image: firstImage[0],
+      });
+    }
+    setCartMenu(false);
+  };
+
   const AddToCart = () => {
+    if (existsInCart) {
+      setCartMenu((prevState) => !prevState);
+      return;
+    }
     setCartItems({
       slug,
       quantity,
@@ -66,52 +99,67 @@ function ProductPage() {
   };
 
   return (
-    <main>
-      <div className="productDetails">
-        <div className="flex flex-col w-[100%] lg:w-[60%]">
-          <h3 className="productDetails-Title">{product?.title}</h3>
-          <div className="productDetails-Image">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              className="productDetails-Image__main"
-              src={firstImage[0]}
-              alt=""
-            />
+    <div>
+      <Head>
+        <title>{product?.title}</title>
+        <meta
+          name="description"
+          content="Shop Clothing Online for best prices!"
+        />
+        <link rel="icon" href="/logoIcon.ico" />
+      </Head>
+      <main>
+        <div className="productDetails">
+          <div className="flex flex-col w-[100%] lg:w-[60%]">
+            <h3 className="productDetails-Title">{product?.title}</h3>
+            <div className="productDetails-Image">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className="productDetails-Image__main"
+                src={firstImage ? firstImage[0] : ""}
+                alt=""
+              />
+            </div>
           </div>
-        </div>
 
-        <div className="productActions">
-          <h2 className="text-2xl text-purple">₹.{product?.price}</h2>
-          <p className="productDetails-Description ">{product?.description}</p>
-          <div className="productActions-Quantity">
-            <span>Quantity</span>
-            <div className="flex gap-3 w-[50%] lg:w-[40%] justify-between items-center">
-              <button className="btn-outline" onClick={decreaseQuantity}>
-                <BsDash className="text-xl" />
+          <div className="productActions">
+            <h2 className="text-2xl text-purple">₹.{product?.price}</h2>
+            <p className="productDetails-Description ">
+              {product?.description}
+            </p>
+            <div className="productActions-Quantity">
+              <span>Quantity</span>
+              <div className="flex gap-3 w-[50%] lg:w-[40%] justify-between items-center">
+                <button className="btn-outline" onClick={decreaseQuantity}>
+                  <BsDash className="text-xl" />
+                </button>
+
+                <span>{quantity}</span>
+                <button className="btn-outline" onClick={increaseQuantity}>
+                  <BsPlus className="text-xl" />
+                </button>
+              </div>
+            </div>
+            <div className="flex flex-col w-full justify-between items-center md:flex-row lg:justify-start lg:gap-10">
+              <button
+                className="productActions-Button btn-outline w-full md:w-auto"
+                onClick={BuyNow}
+              >
+                <BsBagCheckFill className="text-2xl md:text-lg" />
+                Buy Now
               </button>
-
-              <span>{quantity}</span>
-              <button className="btn-outline" onClick={increaseQuantity}>
-                <BsPlus className="text-xl" />
+              <button
+                className="productActions-Button btn  w-full  md:w-auto"
+                onClick={AddToCart}
+              >
+                <BsCartPlus className="text-2xl md:text-lg" />
+                {existsInCart ? `Added to Cart` : `Add To Cart`}
               </button>
             </div>
           </div>
-          <div className="flex flex-col w-full justify-between items-center md:flex-row lg:justify-start lg:gap-10">
-            <button className="productActions-Button btn-outline w-full md:w-auto">
-              <BsBagCheckFill className="text-2xl md:text-lg" />
-              Buy Now
-            </button>
-            <button
-              className="productActions-Button btn  w-full  md:w-auto"
-              onClick={AddToCart}
-            >
-              <BsCartPlus className="text-2xl md:text-lg" />
-              Add To Cart
-            </button>
-          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 }
 

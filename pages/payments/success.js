@@ -10,23 +10,6 @@ const stripe = require("stripe")(
 );
 
 export async function getServerSideProps(params) {
-  // let session = params?.query?.session_id;
-
-  // const order = await stripe.checkout.sessions.retrieve(session, {
-  //   expand: ["line_items"],
-  // });
-
-  // const expiry = new Date(order.expires_at);
-  // expiry.getTime();
-  // let current = new Date();
-  // const isValid = current < expiry;
-  // // console.log(isValid);
-  // console.log(
-  //   session,
-  //   order,
-  //   expiry.toLocaleDateString(),
-  //   current.toLocaleDateString()
-  // );
   return {
     props: { order: {}, isValid: false },
   };
@@ -38,6 +21,7 @@ const Success = ({ order }) => {
 
   useEffect(() => {
     setCartItems([]);
+    localStorage.setItem("cartItems", "");
   }, []);
 
   return (
@@ -79,7 +63,7 @@ const Success = ({ order }) => {
 
           <p
             className="text-pink underline cursor-pointer"
-            onClick={() => router.push("/orders")}
+            onClick={() => router.push("/profile/orders")}
           >
             Your Orders
           </p>

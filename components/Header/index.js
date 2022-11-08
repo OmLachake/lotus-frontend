@@ -1,3 +1,4 @@
+import { useUser } from "@auth0/nextjs-auth0";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -13,8 +14,8 @@ import {
 } from "../../atoms";
 
 const getCartFromLocal = () => {
-  const cartItems = JSON.parse(localStorage.getItem("cartItems"));
-  return cartItems ? cartItems : [];
+  const data = localStorage.getItem("cartItems");
+  return data ? JSON.parse(data) : [];
 };
 
 import Cart from "../Cart";
@@ -23,6 +24,10 @@ function Header() {
   const [sideMenu, setSideMenu] = useRecoilState(sideMenuAtom);
   const [cartMenu, setCartMenu] = useRecoilState(CartMenuAtom);
   const [cartItems, setCartItems] = useRecoilState(CartItemsAtom);
+  const cartCount = useRecoilValue(CartCountSelector);
+
+  const { user } = useUser();
+  const isLoggedIn = user ? true : false;
 
   useEffect(() => {
     setCartItems(getCartFromLocal());
@@ -39,8 +44,6 @@ function Header() {
   const closeSideMenu = () => {
     setSideMenu(false);
   };
-  const isLoggedIn = false;
-  const cartCount = useRecoilValue(CartCountSelector);
 
   const renderActions = () => {
     return (
@@ -92,11 +95,11 @@ function Header() {
         {isLoggedIn && (
           <>
             <div className="px-3 text-xl font-light font-josan">
-              Hello <span className="font-bold font-lato">Om,</span>
+              Hello <span className="font-bold font-lato">{user.name}</span>
             </div>
             <ul className="">
               <li>
-                <Link href="/settings">
+                <Link href="/profile/settings">
                   <p
                     className="header-nav-link cursor-pointer !text-purple"
                     onClick={closeSideMenu}
@@ -106,7 +109,7 @@ function Header() {
                 </Link>
               </li>
               <li>
-                <Link href="/orders">
+                <Link href="/profile/orders">
                   <p
                     className="header-nav-link cursor-pointer !text-purple"
                     onClick={closeSideMenu}
@@ -117,7 +120,7 @@ function Header() {
               </li>
 
               <li>
-                <Link href="/wishlist">
+                <Link href="/profile/wishlist">
                   <p
                     className="header-nav-link cursor-pointer !text-purple"
                     onClick={closeSideMenu}
@@ -128,12 +131,14 @@ function Header() {
               </li>
 
               <li>
-                <p
-                  onClick={closeSideMenu}
-                  className="!text-purple header-nav-link flex justify-start items-center gap-3 cursor-pointer "
-                >
-                  <MdExitToApp /> Sign Out
-                </p>
+                <Link href="/api/auth/logout">
+                  <p
+                    onClick={closeSideMenu}
+                    className="!text-purple header-nav-link flex justify-start items-center gap-3 cursor-pointer "
+                  >
+                    <MdExitToApp /> Sign Out
+                  </p>
+                </Link>
               </li>
             </ul>
 
@@ -166,11 +171,11 @@ function Header() {
 
         {!isLoggedIn && (
           <div className="flex flex-col gap-5">
-            <Link href={"/signin"}>
+            <Link href={"/api/auth/login"}>
               <div className="btn-outline !shadow-none text-sm">Sign In</div>
             </Link>
 
-            <Link href={"/signup"}>
+            <Link href={"/api/auth/login"}>
               <div className="btn text-sm">Sign Up</div>
             </Link>
           </div>
@@ -277,13 +282,13 @@ function Header() {
   const renderGuest = () => {
     return (
       <div className="flex justify-between items-center gap-2">
-        <Link href={"/signin"}>
+        <Link href={"/api/auth/login"}>
           <div className="btn-outline !border-none !shadow-none text-sm">
             Sign In
           </div>
         </Link>
 
-        <Link href={"/signup"}>
+        <Link href={"/api/auth/login"}>
           <div className="btn text-sm hidden lg:flex">Sign Up</div>
         </Link>
       </div>
@@ -300,7 +305,7 @@ function Header() {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          {"Hello Om"}
+          Hello <span className="w-[60%] overflow-hidden">{user.name}</span>
           <span>
             <FaAngleDown />
           </span>
@@ -310,26 +315,28 @@ function Header() {
           aria-labelledby="dropdownMenuMediumButton"
         >
           <li>
-            <Link href="/settings">
+            <Link href="/profile/settings">
               <p className="dropdown-item profileOption">Settings</p>
             </Link>
           </li>
           <li>
-            <Link href="/orders">
+            <Link href="/profile/orders">
               <p className="dropdown-item profileOption">My Orders</p>
             </Link>
           </li>
 
           <li>
-            <Link href="/wishlist">
+            <Link href="/profile/wishlist">
               <p className="dropdown-item profileOption">Wishlist</p>
             </Link>
           </li>
 
           <li>
-            <p className="dropdown-item profileOption hover:text-purple">
-              <MdExitToApp /> Sign Out
-            </p>
+            <Link href="/api/auth/logout">
+              <p className="dropdown-item profileOption hover:text-purple">
+                <MdExitToApp /> Sign Out
+              </p>
+            </Link>
           </li>
         </ul>
       </div>
