@@ -7,6 +7,11 @@ const nextConfig = {
   webpack: (config, options) => {
     config.module.rules.push({
       target: "node",
+      dllplugins: {
+        defaults: {
+          exclude: ["stripe"],
+        },
+      },
     });
 
     return config;
