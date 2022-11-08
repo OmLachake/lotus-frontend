@@ -9,7 +9,7 @@ const Cancelled = () => {
     <main>
       <div className="w-full h-full flex justify-center items-center h-[50vh]">
         <div
-          className="flex justify-center flex-col items-center my-10 w-[40vw] border-2 border-purple h-20vh
+          className="flex justify-center flex-col items-center my-10 md:w-[40vw] border-2 border-purple h-20vh
       p-5 py-10 bg-white rounded-lg
       "
         >

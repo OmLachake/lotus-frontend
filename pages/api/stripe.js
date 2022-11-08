@@ -1,8 +1,8 @@
-import Stripe from "stripe";
+const Stripe = require("stripe");
 import { getSession } from "@auth0/nextjs-auth0";
 const stripe = new Stripe(`${process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY}`);
 
-export default async function hadnler(req, res) {
+export default async function handler(req, res) {
   const UserSession = getSession(req, res);
   const user = UserSession?.user;
   if (user) {

@@ -1,7 +1,9 @@
 import { useUser } from "@auth0/nextjs-auth0";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Script from "next/script";
 import { useEffect } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { MdExitToApp, MdOutlineShoppingCart } from "react-icons/md";
@@ -348,21 +350,24 @@ function Header() {
   };
 
   return (
-    <header>
-      <div className="flex justify-between items-center w-full">
-        {/* NavLink */}
-        {renderNavLinks()}
-        {/* Actions */}
-        {renderActions()}
-        {/* Menu Button */}
-        {renderHamburgerIcon()}
-        {/* Cart */}
-        {renderCart()}
-      </div>
+    <div>
+      <header>
+        <Script src="https://js.stripe.com/v3/"></Script>
+        <div className="flex justify-between items-center w-full">
+          {/* NavLink */}
+          {renderNavLinks()}
+          {/* Actions */}
+          {renderActions()}
+          {/* Menu Button */}
+          {renderHamburgerIcon()}
+          {/* Cart */}
+          {renderCart()}
+        </div>
 
-      {/* Sidebar Mobile Menu */}
-      {renderSideMenuBar()}
-    </header>
+        {/* Sidebar Mobile Menu */}
+        {renderSideMenuBar()}
+      </header>
+    </div>
   );
 }
 

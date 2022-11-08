@@ -29,9 +29,9 @@ const Orders = ({ user, orders }) => {
 
   const renderOrders = (orders) => {
     return orders.map((order) => {
-      const { id, createdAt, amount, shipping } = order;
+      const { id, created, amount, shipping } = order;
       const orderId = id.slice(15, 25);
-      const createdDate = order.created * 1000;
+      const createdDate = created * 1000;
       const date = new Date(createdDate);
       const nf = Intl.NumberFormat("en-IN", {
         style: "currency",
@@ -46,12 +46,12 @@ const Orders = ({ user, orders }) => {
         >
           <div className="w-[50%] h-full flex flex-col items-stretch justify-start">
             <div
-              className="text-xl text-pink font-josan font-light w-fit 
+              className="text-lg md:text-xl text-pink font-josan font-light w-fit 
             mb-2 hover:text-purple hover:underline underline-offset-2"
             >
               # {orderId}
             </div>
-            <div className="w-fit font-josan text-xl ">
+            <div className="w-fit font-josan text-lg md:text-xl  ">
               {" "}
               {date.toLocaleDateString(createdDate)}
             </div>
@@ -61,11 +61,11 @@ const Orders = ({ user, orders }) => {
             </div>
           </div>
           <div className="w-[50%] text-right h-full">
-            <div className="w-full text-xl font-bold mb-2">
+            <div className="w-full text-lg md:text-xl font-bold mb-2">
               {nf.format(amount)}
             </div>
             <div className="font-josan">
-              <div className="text-navy-blue font-light text-xl">
+              <div className="text-navy-blue font-light text-lg md:text-xl ">
                 {shipping?.name}
               </div>
               <div>{shipping?.address?.city}</div>
