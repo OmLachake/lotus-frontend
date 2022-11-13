@@ -1,5 +1,7 @@
 # Lotus Wear
 
+(https://lotus-wear.vercel.app)[https://lotus-wear.vercel.app]
+
 A ecommerce site built using the JAMStack approach. 
 
 ### Built Using :
