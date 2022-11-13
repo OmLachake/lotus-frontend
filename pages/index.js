@@ -17,10 +17,6 @@ export default function Home() {
 
   const products = data?.products?.data;
 
-  const renderProducts = () => {
-    return;
-  };
-
   return (
     <div className="">
       <Head>
