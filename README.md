@@ -6,6 +6,9 @@ A ecommerce site built using the JAMStack approach.
 
 ### Site doesnt work as Heroku offed their free plan, here is the demo video.
 
+[Demo.webm](https://user-images.githubusercontent.com/69624554/222938950-a0650b13-94a7-4156-b7fe-366a7ecc3851.webm)
+
+
 ### Built Using :
 - Next Js
 - Tailwind CSS
